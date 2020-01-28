@@ -8,7 +8,7 @@ function validation(cpfValue) {
     document.getElementById('tituloDocumentos').innerHTML = 'Certificados de: ' + cpfValue;
 }
 function back() {
-    document.getElementById('resultado').setAttribute("class", "ocultar");
     document.getElementById('busca').removeAttribute("class", "ocultar");
+    document.getElementById('resultado').setAttribute("class", "ocultar");
     document.getElementById('inputCPF').value = '';
 }
