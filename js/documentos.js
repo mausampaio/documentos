@@ -27,9 +27,10 @@ function listFiles(cpfValue) {
     storage.ref().child(cpfValue).listAll().then(function(todosArquivos){
         files = todosArquivos.items;
         for(let i = 0; i<files.length; i++){
+            var nrcoluna = i+1;
             fileNames.push(files[i].name);
             storage.ref(cpfValue+'/'+fileNames).getDownloadURL().then(function(url){
-                document.getElementById('certificado').innerHTML = '<a href="'+url+'" target="_blank" rel="noopener noreferrer">Certificado</a>'
+                document.getElementById('row').innerHTML = '<th scope="row">'+nrcoluna+'</th>'+'<td>'+fileNames+'</td>'+'<td>'+'<a href="' + url + '" target="_blank" rel="noopener noreferrer">Certificado</a>'+'</td>';
             });            
         }
     });
