@@ -1,3 +1,5 @@
+var html = '';
+
 function search() {
     var cpf = document.getElementById('inputCPF').value;
     validation(cpf);
@@ -27,10 +29,24 @@ function listFiles(cpfValue) {
     storage.ref().child(cpfValue).listAll().then(function(todosArquivos){
         files = todosArquivos.items;
         for(let i = 0; i<files.length; i++){
-            var nrcoluna = i+1;
+            let nrcoluna = i+1;
+            let filename = files[i].name;
             fileNames.push(files[i].name);
-            storage.ref(cpfValue+'/'+fileNames).getDownloadURL().then(function(url){
-                document.getElementById('row').innerHTML = '<th scope="row">'+nrcoluna+'</th>'+'<td>'+fileNames+'</td>'+'<td>'+'<a href="' + url + '" target="_blank" rel="noopener noreferrer">Certificado</a>'+'</td>';
+            storage.ref(cpfValue+'/'+fileNames[i]).getDownloadURL().then(function(url){
+                //  html += '<tr>'+'<th scope="row">'+nrcoluna+'</th>'+'<td>'+filename+'</td>'+'<td>'+'<a href="' + url + '" target="_blank" rel="noopener noreferrer">Certificado</a>'+'</td>'+'</tr>';
+                //  document.getElementById('row').innerHTML = html;
+                var ul = document.getElementById("list");
+                var li = document.createElement("li");
+                var listItem = '<li class="list-group-item"><a href="' + url + '" target="_blank">' +fileNames[i] + '</a></li>';
+                //li.setAttribute("class", "list-group-item")
+                li.innerHTML = listItem;
+                ul.appendChild(li);
+                fileLinks.push(url);
+            }).catch(function(error){
+                console.log(error);
+            }).finally(function(){
+                console.log('Nome', fileNames[i]);
+                console.log('Link', fileLinks[i]);
             });            
         }
     });
