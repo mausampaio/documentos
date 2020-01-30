@@ -37,8 +37,8 @@ function listFiles(cpfValue) {
                 //  document.getElementById('row').innerHTML = html;
                 var ul = document.getElementById("list");
                 var li = document.createElement("li");
-                var listItem = '<li class="list-group-item"><a href="' + url + '" target="_blank">' +fileNames[i] + '</a></li>';
-                //li.setAttribute("class", "list-group-item")
+                var listItem = '<a href="' + url + '" target="_blank">' +fileNames[i] + '</a>';
+                li.setAttribute("class", "list-group-item")
                 li.innerHTML = listItem;
                 ul.appendChild(li);
                 fileLinks.push(url);
